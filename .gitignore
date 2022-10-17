@@ -1,0 +1,9 @@
+ducky.jpk
+files/__init__.mpy
+files/consumer_control.mpy
+files/consumer_control_code.mpy
+files/keyboard.mpy
+files/keyboard_layout_base.mpy
+files/keyboard_layout_us.mpy
+files/keycode.mpy
+files/mouse.mpy
