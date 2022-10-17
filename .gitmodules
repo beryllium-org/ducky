@@ -1,3 +1,6 @@
 [submodule "submodules/jz"]
 	path = submodules/jz
 	url = https://github.com/bill88t/jz
+[submodule "submodules/Adafruit_CircuitPython_HID"]
+	path = submodules/Adafruit_CircuitPython_HID
+	url = https://github.com/adafruit/Adafruit_CircuitPython_HID
