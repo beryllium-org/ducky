@@ -1,4 +1,4 @@
 # jpkg-template-package
-A template package for jpkg
+Ducky-commands for ljinux
 <br />
 Build with <code>make package</code>
