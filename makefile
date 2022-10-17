@@ -13,7 +13,8 @@ package: modules
 	@python3 -u scripts/make_hid.py
 	@python3 -u scripts/generate_package.py
 clean:
-	@if [ -e "ducky.jpk" ]; then rm package.jpk; fi
+	@if [ -e "ducky.jpk" ]; then rm ducky.jpk; fi
+	@if [ -e "./files/__init__.mpy" ]; then rm ./files/__init__.mpy; fi
 	@if [ -e "./files/consumer_control_code.mpy" ]; then rm ./files/consumer_control_code.mpy; fi
 	@if [ -e "./files/consumer_control.mpy" ]; then rm ./files/consumer_control.mpy; fi
 	@if [ -e "./files/keyboard_layout_base.mpy" ]; then rm ./files/keyboard_layout_base.mpy; fi
