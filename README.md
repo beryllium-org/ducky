@@ -1,4 +1,5 @@
 # jpkg-template-package
 Ducky-commands for ljinux
-<br />
+<br /><br />
+Only compatible with boards that support usb_cdc.<br />
 Build with <code>make package</code>
