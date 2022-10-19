@@ -1,6 +1,28 @@
-print("""
-    This script is run during the first install of the package.
-    
-    You should copy the files you want in the system from here.
-    You should NOT bother with the manifest or the uninstall files from here.
-""")
+# ducky files
+
+for filee in ["ducky.lja", "ducky.py", "duckyline.lja", "duckyline.py"]:
+    ljinux.api.var("argj", f"cp {filee} /bin/{filee}")
+    ljinux.based.command.fpexecc([None, "/bin/cp.py"])
+    del filee
+
+# hid files
+try:
+    ljinux.api.var("argj", f"mkdir &/lib/adafruit_hid")
+    ljinux.based.command.fpexecc([None, "/bin/mkdir.py"])
+except:
+    pass
+
+for filee in [
+    "__init__.mpy",
+    "consumer_control_code.mpy",
+    "consumer_control.mpy",
+    "keyboard_layout_base.mpy",
+    "keyboard_layout_us.mpy",
+    "keyboard.mpy",
+    "keycode.mpy",
+    "mouse.mpy",
+]:
+    ljinux.api.var("argj", f"cp {filee} &/lib/adafruit_hid/{filee}")
+    ljinux.based.command.fpexecc([None, "/bin/cp.py"])
+
+ljinux.api.var("return", "0")

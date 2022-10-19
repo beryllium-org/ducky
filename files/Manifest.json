@@ -6,6 +6,6 @@
     "conflicts": [],
     "install": "installer.py",
     "remove": "uninstaller.py",
-    "update": "updater.py",
+    "update": "installer.py",
     "restart_required": false
 } 
