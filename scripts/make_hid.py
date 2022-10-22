@@ -1,9 +1,11 @@
 from platform import uname
 from os import listdir, system
 
+
 def errexit():
     print("Compilation error, exiting")
     exit(1)
+
 
 mpyn = f"./scripts/mpy-cross-{uname().machine}"
 path = "./submodules/Adafruit_CircuitPython_HID/adafruit_hid/"
