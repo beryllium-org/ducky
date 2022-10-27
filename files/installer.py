@@ -6,11 +6,8 @@ for filee in ["ducky.lja", "ducky.py", "duckyline.lja", "duckyline.py"]:
     del filee
 
 # hid files
-try:
-    ljinux.api.var("argj", f"mkdir &/lib/adafruit_hid")
-    ljinux.based.command.fpexecc([None, "/bin/mkdir.py"])
-except:
-    pass
+ljinux.api.var("argj", f"mkdir &/lib/adafruit_hid")
+ljinux.based.command.fpexecc([None, "/bin/mkdir.py"])
 
 for filee in [
     "__init__.mpy",
