@@ -14,7 +14,7 @@ print(f"Compiling Adafruit_HID..\nUsing mpycross: {mpyn}\n")
 
 for filee in listdir(path):
     a = system(
-        f"{mpyn} {path}{filee} -s {filee[:-3]} -v -O4 -o ./files/{filee[:-3]}.mpy"
+        f"{mpyn} {path}{filee} -s adafruit_hid_{filee[:-3]} -v -O4 -o ./files/{filee[:-3]}.mpy"
     )
     print(f"{filee} -> {filee[:-3]}.mpy")
 
