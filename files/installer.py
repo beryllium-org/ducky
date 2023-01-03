@@ -1,13 +1,10 @@
 # ducky files
-
 for filee in ["ducky.lja", "ducky.py", "duckyline.lja", "duckyline.py"]:
-    ljinux.api.setvar("argj", f"cp {filee} /bin/{filee}")
-    ljinux.based.command.fpexec("/bin/cp.py")
+    ljinux.based.run(f"cp {filee} /bin/{filee}")
     del filee
 
 # hid files
-ljinux.api.setvar("argj", f"mkdir &/lib/adafruit_hid")
-ljinux.based.command.fpexec("/bin/mkdir.py")
+ljinux.based.run("mkdir &/lib/adafruit_hid")
 
 for filee in [
     "__init__.mpy",
@@ -19,7 +16,6 @@ for filee in [
     "keycode.mpy",
     "mouse.mpy",
 ]:
-    ljinux.api.setvar("argj", f"cp {filee} &/lib/adafruit_hid/{filee}")
-    ljinux.based.command.fpexec("/bin/cp.py")
+    ljinux.based.run(f"cp {filee} &/lib/adafruit_hid/{filee}")
 
 ljinux.api.setvar("return", "0")
