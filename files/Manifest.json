@@ -1,11 +1,11 @@
 {
     "JPKG_minimum_version": 0,
     "package_name": "ducky",
-    "version": [1, 0, 1],
+    "version": [1, 0, 2],
     "dependencies": [],
     "conflicts": [],
     "install": "installer.py",
     "remove": "uninstaller.py",
     "update": "installer.py",
     "restart_required": false
-} 
+}
