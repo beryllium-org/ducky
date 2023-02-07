@@ -4,7 +4,7 @@ for filee in ["ducky.lja", "ducky.py", "duckyline.lja", "duckyline.py"]:
     del filee
 
 # hid files
-ljinux.based.run("mkdir &/lib/adafruit_hid")
+ljinux.based.run("mkdir /lib/adafruit_hid")
 
 for filee in [
     "__init__.mpy",
@@ -16,6 +16,6 @@ for filee in [
     "keycode.mpy",
     "mouse.mpy",
 ]:
-    ljinux.based.run(f"cp {filee} &/lib/adafruit_hid/{filee}")
+    ljinux.based.run(f"cp {filee} /lib/adafruit_hid/{filee}")
 
 ljinux.api.setvar("return", "0")
