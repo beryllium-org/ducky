@@ -14,8 +14,8 @@ path = "./submodules/Adafruit_CircuitPython_HID/adafruit_hid/"
 
 for filee in listdir(path):
     try:
-        circuitmpy.compile_mpy(f"{path}{filee}", f"./files/{filee[:-3]}.mpy")
         print(f"{filee} -> {filee[:-3]}.mpy")
+        circuitmpy.compile_mpy(f"{path}{filee}", f"./files/{filee[:-3]}.mpy")
     except:
         errexit()
 
