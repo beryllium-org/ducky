@@ -10,6 +10,7 @@ def errexit():
 spath.append("./submodules/CircuitMPY/")
 import circuitmpy
 
+circuitmpy.fetch_mpy()
 path = "./submodules/Adafruit_CircuitPython_HID/adafruit_hid/"
 
 for filee in listdir(path):
