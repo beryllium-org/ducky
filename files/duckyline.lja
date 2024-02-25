@@ -1,2 +1,2 @@
 # ducky-compatible usb hid command, from stdin
-fpexec /bin/duckyline.py
+fpexec /bin/ducky/duckyline.py
