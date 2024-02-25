@@ -1,14 +1,15 @@
 # ducky files
-for filee in ["ducky.lja", "ducky.py", "duckyline.lja", "duckyline.py"]:
-    ljinux.api.setvar("argj", f". {filee} /bin/{filee}")
-    ljinux.based.command.fpexec("/bin/cp.py")
-    del filee
+for pv[get_pid()]["filee"] in ["ducky.lja", "duckyline.lja"]:
+    ljinux.based.run("cp " + vr("filee") + " /bin/" + vr("filee"))
+
+ljinux.based.run("mkdir /bin/ducky")
+for pv[get_pid()]["filee"] in ["ducky.py", "duckyline.py", "duckyline.py"]:
+    ljinux.based.run("cp " + vr("filee") + " /bin/ducky/" + vr("filee"))
 
 # hid files
-ljinux.api.setvar("argj", ". /lib/adafruit_hid")
-ljinux.based.command.fpexec("/bin/mkdir.py")
+ljinux.based.run("mkdir /lib/adafruit_hid")
 
-for filee in [
+for pv[get_pid()]["filee"] in [
     "__init__.mpy",
     "consumer_control_code.mpy",
     "consumer_control.mpy",
@@ -18,9 +19,6 @@ for filee in [
     "keycode.mpy",
     "mouse.mpy",
 ]:
-    ljinux.api.setvar("argj", f". {filee} /lib/adafruit_hid/{filee}")
-    ljinux.based.command.fpexec("/bin/cp.py")
-    del filee
+    ljinux.based.run("cp " + vr("filee") + " /lib/adafruit_hid/" + vr("filee"))
 
-ljinux.api.setvar("argj")
 ljinux.api.setvar("return", "0")
