@@ -1,0 +1,2 @@
+# Use ducky to cat a file
+fpexec /bin/ducky/duckycat.py

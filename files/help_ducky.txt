@@ -1,0 +1,3 @@
+Usage: ducky [OPTION]... SCRIPT...
+Run a ducky script.
+  -h, --help        displays this help message.

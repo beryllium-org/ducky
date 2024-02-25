@@ -1,78 +1,94 @@
 rename_process("ducky")
-if cptoml.fetch("usb_hid_available", "LJINUX"):
-    if cptoml.fetch("usb_hid_enabled", "LJINUX"):
-        ljinux.api.subscript("/bin/ducky/duckyload.py")
-    else:
-        term.write(
-            "usb_hid is not enabled in `&/settings.toml`!\n"
-            + "To enable it, set `usb_hid_enabled` to 'true'."
-        )
+vr("opts", ljinux.api.xarg())
+if "h" in vr("opts")["o"] or "help" in vr("opts")["o"]:
+    ljinux.based.run("cat /usr/share/help/ducky.txt")
 else:
-    term.write("This board does not support usb_hid!")
-try:
-    vr("opts", ljinux.api.xarg())
-    if "h" in vr("opts")["o"] or "help" in vr("opts")["o"]:
-        ljinux.based.run("cat /")
-    else:
-        if len(vr("opts")["w"]):
-            pass
-        else:
-            pass
-    if ljinux.api.isdir(ljinux.based.user_vars["argj"].split()[1], rdir=getcwd()):
-        ljinux.based.error(4, ljinux.based.user_vars["argj"].split()[1])
-        ljinux.based.user_vars["return"] = "1"
-    else:
-        with open(
-            ljinux.api.betterpath(ljinux.based.user_vars["argj"].split()[1]), "r"
-        ) as f:
-            dataa = f.readlines()
-
-        lc = len(dataa)
-        cl = 0
-
-        for i in range(0, lc):
-            dataa[i] = dataa[i].replace("\n", "")
-
-        ljinux.based.user_vars["return"] = "0"
-        while cl != lc:
-            line = dataa[cl]
-            print(line)
-            cmd = (
-                line[: line.find(" ", 0)].upper()
-                if line.find(" ", 0) != -1
-                else line.upper()
-            )
-            args = line[line.find(" ", 0) + 1 :]
-            del line
-            if cmd.upper() == "DELAY":
-                sleep(float(args) / 1000)
-            elif cmd == "STRING":
-                layout.write(args)
-            elif cmd == "REM":
-                pass
-            elif cmd in ["DEFAULT_DELAY", "DEFAULTDELAY"]:
-                defaultDelay = int(line[13:]) * 10
-            elif cmd in duckyCommands:
-                stack = [cmd] + args.split()
-                for i in stack:
-                    if i.upper() in duckyCommands:
-                        kbd.press(duckyCommands[i.upper()])
+    if cptoml.fetch("usb_hid_available", "LJINUX"):
+        if cptoml.fetch("usb_hid_enabled", "LJINUX"):
+            if len(vr("opts")["w"]):
+                ljinux.api.setvar("return", "1")
+                with ljinux.api.fopen(vr("opts")["w"][0]) as pv[get_pid()]["script"]:
+                    if vr("script") is not None:
+                        vr("cmds", vr("script").readlines())
+                        vr("lc", len(vr("cmds")))
+                        for pv[get_pid()]["i"] in range(vr("lc")):
+                            vr("cmds")[vr("i")] = vr("cmds")[vr("i")].replace("\n", "")
+                        ljinux.api.subscript("/bin/ducky/duckyload.py")
+                        if vr("success"):
+                            vr("cl", 0)
+                            vr("nrepeat", False)
+                            ljinux.api.setvar("return", "0")
+                            while vr("cl") != vr("lc"):
+                                vr("line", vr("cmds")[vr("cl")])
+                                term.write(vr("line"))
+                                vr("lsps", vr("line").find(" "))
+                                vr("args", None)
+                                if vr("lsps") != -1:
+                                    vr("cmd", vr("line")[: vr("lsps")])
+                                    vr("args", vr("line")[vr("lsps") + 1 :])
+                                else:
+                                    vr("cmd", vr("line"))
+                                vr("cmd", vr("cmd").upper())
+                                if vr("cmd") == "DELAY":
+                                    try:
+                                        sleep(float(vr("args")) / 1000)
+                                    except ValueError:
+                                        term.write("Invalid time period specified!")
+                                        ljinux.api.setvar("return", "1")
+                                        break
+                                elif vr("cmd") == "STRING":
+                                    vr("layout").write(vr("args"))
+                                elif vr("cmd") == "REM":
+                                    pass
+                                elif vr("cmd") in ["DEFAULT_DELAY", "DEFAULTDELAY"]:
+                                    vr("defaultDelay", int(vr("args")))
+                                elif vr("cmd") in vr("duckyCommands"):
+                                    vr("cmdl", vr("line").upper().split(" "))
+                                    for pv[get_pid()]["i"] in vr("cmdl"):
+                                        if vr("i") in vr("duckyCommands"):
+                                            vr("kbd").press(
+                                                vr("duckyCommands")[vr("i")]
+                                            )
+                                        else:
+                                            term.write(
+                                                'Error: Command "'
+                                                + vr("i")
+                                                + '" not found!'
+                                            )
+                                            ljinux.api.setvar("return", "1")
+                                            vr("kbd").release_all()
+                                            break
+                                    vr("kbd").release_all()
+                                elif vr("cmd") == "REPEAT":
+                                    if vr("nrepeat"):
+                                        vr("nrepeat", False)
+                                        term.write("*ignored*")
+                                    else:
+                                        vrm("cl", 2)
+                                        vr("nrepeat", True)
+                                else:
+                                    term.write(
+                                        'Error: Command "' + vr("cmd") + '" not found!'
+                                    )
+                                    ljinux.api.setvar("return", "1")
+                                    break
+                                vrp("cl")
+                                sleep(vr("defaultDelay") / 1000)
+                            del Keyboard, KeyboardLayoutUS, Keycode
+                        else:
+                            term.write("Failed to initialize usb_hid!")
                     else:
-                        print(f'Error: Key "{i}" not found')
-                        ljinux.based.user_vars["return"] = "1"
-                        break
-                del stack
-                kbd.release_all()
-            elif cmd == "REPEAT":
-                cl -= 2
+                        ljinux.based.error(
+                            4,
+                            f=vr("opts")["w"][0],
+                            prefix=f"{colors.blue_t}ducky{colors.endc}",
+                        )
             else:
-                print(f'Error: Command "{cmd}" not found')
-                ljinux.based.user_vars["return"] = "1"
-                break
-            sleep(defaultDelay / 1000)
-            del cmd, args
-            cl += 1
-        del duckyCommands, dataa, lc, cl, kbd, layout
-        del KeyboardLayoutUS, Keycode, defaultDelay
-except IndexError:
-    ljinux.based.error(1)
+                ljinux.based.error(2, prefix=f"{colors.blue_t}ducky{colors.endc}")
+        else:
+            term.write(
+                "usb_hid is not enabled in `&/settings.toml`!\n"
+                + "To enable it, set `usb_hid_enabled` to 'true' and reboot."
+            )
+    else:
+        term.write("This board does not support usb_hid!")

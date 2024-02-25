@@ -1,0 +1,3 @@
+Usage: duckycat [OPTION]... FILE...
+Use ducky to catenate a file over usb_hid.
+  -h, --help        displays this help message.

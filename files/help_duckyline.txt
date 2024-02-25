@@ -1,0 +1,3 @@
+Usage: duckyline [OPTION]... INPUT...
+Run a ducky script line, from stdin.
+  -h, --help        displays this help message.
