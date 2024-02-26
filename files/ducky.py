@@ -1,23 +1,23 @@
 rename_process("ducky")
-vr("opts", ljinux.api.xarg())
+vr("opts", be.api.xarg())
 if "h" in vr("opts")["o"] or "help" in vr("opts")["o"]:
-    ljinux.based.run("cat /usr/share/help/ducky.txt")
+    be.based.run("cat /usr/share/help/ducky.txt")
 else:
-    if cptoml.fetch("usb_hid_available", "LJINUX"):
-        if cptoml.fetch("usb_hid_enabled", "LJINUX"):
+    if cptoml.fetch("usb_hid_available", "BERYLLIUM"):
+        if cptoml.fetch("usb_hid_enabled", "BERYLLIUM"):
             if len(vr("opts")["w"]):
-                ljinux.api.setvar("return", "1")
-                with ljinux.api.fopen(vr("opts")["w"][0]) as pv[get_pid()]["script"]:
+                be.api.setvar("return", "1")
+                with be.api.fopen(vr("opts")["w"][0]) as pv[get_pid()]["script"]:
                     if vr("script") is not None:
                         vr("cmds", vr("script").readlines())
                         vr("lc", len(vr("cmds")))
                         for pv[get_pid()]["i"] in range(vr("lc")):
                             vr("cmds")[vr("i")] = vr("cmds")[vr("i")].replace("\n", "")
-                        ljinux.api.subscript("/bin/ducky/duckyload.py")
+                        be.api.subscript("/bin/ducky/duckyload.py")
                         if vr("success"):
                             vr("cl", 0)
                             vr("nrepeat", False)
-                            ljinux.api.setvar("return", "0")
+                            be.api.setvar("return", "0")
                             while vr("cl") != vr("lc"):
                                 vr("line", vr("cmds")[vr("cl")])
                                 term.write(vr("line"))
@@ -34,7 +34,7 @@ else:
                                         sleep(float(vr("args")) / 1000)
                                     except ValueError:
                                         term.write("Invalid time period specified!")
-                                        ljinux.api.setvar("return", "1")
+                                        be.api.setvar("return", "1")
                                         break
                                 elif vr("cmd") == "STRING":
                                     vr("layout").write(vr("args"))
@@ -55,7 +55,7 @@ else:
                                                 + vr("i")
                                                 + '" not found!'
                                             )
-                                            ljinux.api.setvar("return", "1")
+                                            be.api.setvar("return", "1")
                                             vr("kbd").release_all()
                                             break
                                     vr("kbd").release_all()
@@ -70,7 +70,7 @@ else:
                                     term.write(
                                         'Error: Command "' + vr("cmd") + '" not found!'
                                     )
-                                    ljinux.api.setvar("return", "1")
+                                    be.api.setvar("return", "1")
                                     break
                                 vrp("cl")
                                 sleep(vr("defaultDelay") / 1000)
@@ -78,13 +78,13 @@ else:
                         else:
                             term.write("Failed to initialize usb_hid!")
                     else:
-                        ljinux.based.error(
+                        be.based.error(
                             4,
                             f=vr("opts")["w"][0],
                             prefix=f"{colors.blue_t}ducky{colors.endc}",
                         )
             else:
-                ljinux.based.error(2, prefix=f"{colors.blue_t}ducky{colors.endc}")
+                be.based.error(2, prefix=f"{colors.blue_t}ducky{colors.endc}")
         else:
             term.write(
                 "usb_hid is not enabled in `&/settings.toml`!\n"

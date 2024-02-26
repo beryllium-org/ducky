@@ -1,15 +1,15 @@
 rename_process("duckycat")
-vr("opts", ljinux.api.xarg())
+vr("opts", be.api.xarg())
 if "h" in vr("opts")["o"] or "help" in vr("opts")["o"]:
-    ljinux.based.run("cat /usr/share/help/duckycat.txt")
+    be.based.run("cat /usr/share/help/duckycat.txt")
 else:
-    if cptoml.fetch("usb_hid_available", "LJINUX"):
-        if cptoml.fetch("usb_hid_enabled", "LJINUX"):
+    if cptoml.fetch("usb_hid_available", "BERYLLIUM"):
+        if cptoml.fetch("usb_hid_enabled", "BERYLLIUM"):
             if len(vr("opts")["w"]):
-                ljinux.api.setvar("return", "0")
-                ljinux.api.subscript("/bin/ducky/duckyload.py")
+                be.api.setvar("return", "0")
+                be.api.subscript("/bin/ducky/duckyload.py")
                 if vr("success"):
-                    with ljinux.api.fopen(vr("opts")["w"][0]) as pv[get_pid()]["file"]:
+                    with be.api.fopen(vr("opts")["w"][0]) as pv[get_pid()]["file"]:
                         if vr("file") is not None:
                             vr("lines", vr("file").readlines())
                             vr("lc", len(vr("lines")))
@@ -25,7 +25,7 @@ else:
                                 vr("layout").write(vr("lines")[vr("i")])
                             term.write()
                         else:
-                            ljinux.based.error(
+                            be.based.error(
                                 4,
                                 f=vr("opts")["w"][0],
                                 prefix=f"{colors.blue_t}duckycat{colors.endc}",
@@ -34,9 +34,11 @@ else:
                 else:
                     term.write("Failed to initialize usb_hid!")
             else:
-                term.write(
-                    "usb_hid is not enabled in `&/settings.toml`!\n"
-                    + "To enable it, set `usb_hid_enabled` to 'true' and reboot."
-                )
+                be.based.error(2)
+        else:
+            term.write(
+                "usb_hid is not enabled in `&/settings.toml`!\n"
+                + "To enable it, set `usb_hid_enabled` to 'true' and reboot."
+            )
     else:
         term.write("This board does not support usb_hid!")
