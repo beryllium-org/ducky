@@ -77,6 +77,7 @@ else:
                             del Keyboard, KeyboardLayoutUS, Keycode
                         else:
                             term.write("Failed to initialize usb_hid!")
+                            be.api.setvar("return", "1")
                     else:
                         be.based.error(
                             4,
@@ -90,5 +91,6 @@ else:
                 "usb_hid is not enabled in `&/settings.toml`!\n"
                 + "To enable it, set `usb_hid_enabled` to 'true' and reboot."
             )
+            be.api.setvar("return", "1")
     else:
         term.write("This board does not support usb_hid!")

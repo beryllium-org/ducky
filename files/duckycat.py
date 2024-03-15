@@ -3,12 +3,13 @@ vr("opts", be.api.xarg())
 if "h" in vr("opts")["o"] or "help" in vr("opts")["o"]:
     be.based.run("cat /usr/share/help/duckycat.txt")
 else:
+    be.api.setvar("return", "1")
     if cptoml.fetch("usb_hid_available", "BERYLLIUM"):
         if cptoml.fetch("usb_hid_enabled", "BERYLLIUM"):
             if len(vr("opts")["w"]):
-                be.api.setvar("return", "0")
                 be.api.subscript("/bin/ducky/duckyload.py")
                 if vr("success"):
+                    be.api.setvar("return", "0")
                     with be.api.fopen(vr("opts")["w"][0]) as pv[get_pid()]["file"]:
                         if vr("file") is not None:
                             vr("lines", vr("file").readlines())
