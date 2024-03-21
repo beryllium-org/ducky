@@ -7,7 +7,7 @@ else:
         if cptoml.fetch("usb_hid_enabled", "BERYLLIUM"):
             if len(vr("opts")["w"]):
                 be.api.setvar("return", "1")
-                with be.api.fopen(vr("opts")["w"][0]) as pv[get_pid()]["script"]:
+                with be.api.fs.open(vr("opts")["w"][0]) as pv[get_pid()]["script"]:
                     if vr("script") is not None:
                         vr("cmds", vr("script").readlines())
                         vr("lc", len(vr("cmds")))

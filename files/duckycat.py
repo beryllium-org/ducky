@@ -10,7 +10,7 @@ else:
                 be.api.subscript("/bin/ducky/duckyload.py")
                 if vr("success"):
                     be.api.setvar("return", "0")
-                    with be.api.fopen(vr("opts")["w"][0]) as pv[get_pid()]["file"]:
+                    with be.api.fs.open(vr("opts")["w"][0]) as pv[get_pid()]["file"]:
                         if vr("file") is not None:
                             vr("lines", vr("file").readlines())
                             vr("lc", len(vr("lines")))
